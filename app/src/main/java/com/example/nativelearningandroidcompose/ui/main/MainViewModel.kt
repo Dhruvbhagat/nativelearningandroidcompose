@@ -27,6 +27,10 @@ class MainViewModel(private val repository: DataRepository, private val context:
         }
     }
 
+    fun getCoworkingSpaceByOrganisation(organisation: String): CoworkingSpace? {
+        return responseData.value.find { it.organisation == organisation }
+    }
+
     private fun makeApiCall() {
         repository.getAllCoworkSpaces().enqueue(object : retrofit2.Callback<List<CoworkingSpace>> {
             override fun onFailure(call: Call<List<CoworkingSpace>?>, t: Throwable) {

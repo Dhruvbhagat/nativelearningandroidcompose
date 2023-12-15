@@ -1,5 +1,6 @@
 package com.example.nativelearningandroidcompose.ui.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,13 +21,14 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.nativelearningandroidcompose.data.CoworkingSpace
 
 @Composable
-fun CoworkingList(viewModel: MainViewModel) {
+fun CoworkingList(viewModel: MainViewModel, onItemClicked: (CoworkingSpace) -> Unit) {
     val coworkingSpaces by viewModel.responseData.collectAsStateWithLifecycle()
     LazyColumn {
         items(items = coworkingSpaces, itemContent = { coworkingSpace ->
-            Column () {
+            Column (Modifier.clickable { onItemClicked(coworkingSpace) }) {
                 Text(text = coworkingSpace.organisation!!,
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
